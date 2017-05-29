@@ -1,0 +1,11 @@
+<?xml version="1.0"?>
+
+<launch>
+  <node pkg="navigation2d_example" type="pose_listener" name="pose_listener" output="screen">
+  </node>
+  <!--node pkg="rosserial_python" type="serial_node.py" name="serial_node" output="screen">
+	<param name="port" value="/dev/ttyACM0"/>
+	<param name="baud" value="57600"/>
+  </node-->
+  <!--<node pkg="roomba_500_series" type="roomba500_light_node" respawn="false" name="roomba500_light_node" output="screen"/>-->
+</launch>

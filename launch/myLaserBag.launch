@@ -1,0 +1,4 @@
+<launch>
+
+   <node pkg="rosbag" type="play" name="player" output="screen" args="/home/odroid/catkin_ws/src/navigation2d_example/launch/LaserAndIMU.bag --clock"/>
+</launch>

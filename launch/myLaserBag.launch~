@@ -1,0 +1,4 @@
+<launch>
+
+   <node pkg="rosbag" type="play" name="player" output="screen" args="/home/river85511/LaserAndIMU.bag --clock"/>
+</launch>

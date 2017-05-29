@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+
+<launch>
+
+
+	<!-- SENSOR DEVICE -->
+		<!-- RPLidar -->
+		<include file="$(find rplidar_ros)/launch/rplidar.launch" />
+		<!-- IMU -->
+		<include file="$(find razor_imu_9dof)/launch/razor-pub.launch" />
+
+
+
+</launch>

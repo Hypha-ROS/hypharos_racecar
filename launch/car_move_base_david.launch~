@@ -1,0 +1,41 @@
+<?xml version="1.0"?>
+
+<launch>
+  <master auto="start"/>
+
+  <!-- Run the map server -->
+  <node name="map_server" pkg="map_server" type="map_server" args="/home/odroid/catkin_ws/src/navigation2d_example/launch/5930.yaml"/>
+
+  <!--node pkg="rosserial_python" type="serial_node.py" name="serial_node">
+		<param name="port" value="/dev/ttyACM0"/>
+		<param name="baud" value="57600"/>
+  </node-->
+
+  <!--node pkg="navigation2d_example" type="pose_listener" name="pose_listener"/-->
+
+
+	<!--Lidar Odometry-->
+	<include file="$(find rf2o_laser_odometry)/launch/rf2o_laser_odometry_david.launch" />
+
+  <!--- Run AMCL -->
+  <include file="$(find amcl)/examples/amcl_diff_david.launch" />
+
+	<!--Robot Pose EKF-->
+	<!--include file="$(find robot_pose_ekf)/test/car_pose_ekf_david.launch"/>
+	<node pkg="navigation2d_example" type="convertPoseWithCovarianceToOdometry" respawn="false" name="convertPoseWithCovarianceToOdometry" output="screen"/-->
+
+	<!--node pkg="robot_localization" type="ekf_localization_node" name="ekf_se" clear_params="true">
+    <rosparam command="load" file="$(find robot_localization)/params/ekf_david.yaml" />
+	</node-->
+
+  <!--include file="$(find navigation2d_example)/launch/car_rplidar_david.launch"/>
+  <node pkg="move_base" type="move_base" respawn="false" name="move_base" output="screen">
+    <rosparam file="$(find navigation2d_example)/param/costmap_common_params.yaml" command="load" ns="global_costmap"/>
+    <rosparam file="$(find navigation2d_example)/param/costmap_common_params.yaml" command="load" ns="local_costmap"/>
+    <rosparam file="$(find navigation2d_example)/param/local_costmap_params.yaml" command="load"/>
+    <rosparam file="$(find navigation2d_example)/param/global_costmap_params.yaml" command="load"/>
+    <rosparam file="$(find navigation2d_example)/param/base_local_planner_params.yaml" command="load"/>
+    <rosparam file="$(find navigation2d_example)/param/move_base_params.yaml" command="load"/>
+  </node-->
+  <!--<node pkg="roomba_500_series" type="roomba500_light_node" respawn="false" name="roomba500_light_node" output="screen"/>-->
+</launch>
