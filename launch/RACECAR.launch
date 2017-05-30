@@ -27,10 +27,10 @@
     <!-- RPLidar -->
     <include file="$(find hypha_racecar)/launch/includes/rplidar.launch.xml" />
     <!-- IMU -->
-    <include file="$(find hypha_racecar)/launch/includes/gy85-pub.launch.xml" />
+    <include file="$(find hypha_racecar)/launch/includes/gy85.launch.xml" />
     <!-- Arduino -->
     <node pkg="rosserial_python" type="serial_node.py" name="serial_node">
-        <param name="port" value="/dev/arduino"/>
+        <param name="port" value="/dev/uno"/>
         <param name="baud" value="57600"/>
     </node>
 
@@ -38,17 +38,17 @@
 	<!-- Odometry -->
     <!-- ******** -->
     <!--rf2o_Laser_Odometry-->
-    <include file="$(find hypha_racecar)/launch/includes/rf2o_laser_odometry_david.launch.xml" />
+    <include file="$(find hypha_racecar)/launch/includes/hypha_rf2o.launch.xml" />
     <!-- Robot_Localization -->
     <node pkg="robot_localization" type="ekf_localization_node" name="ekf_se" clear_params="true">
-        <rosparam command="load" file="$(find hypha_racecar)/param/hao.yaml" />
+        <rosparam command="load" file="$(find hypha_racecar)/param/hypha_ekf_params.yaml" />
     </node>
 
     <!-- ************ -->
     <!-- Localization -->
     <!-- ************ -->
     <!-- AMCL -->
-    <include file="$(find hypha_racecar)/param/amcl_diff_david.launch"/>
+    <include file="$(find hypha_racecar)/launch/includes/hypha_amcl.launch.xml"/>
 
     <!-- ******** -->
 	<!-- Navstack -->

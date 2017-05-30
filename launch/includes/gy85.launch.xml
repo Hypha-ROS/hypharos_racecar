@@ -1,0 +1,7 @@
+<launch>
+    <node name="imu_auto"   pkg="hypha_racecar"  type="imu_auto.py" output="screen">
+    <param name="port"       value="/dev/gy85"/>  
+    <param name="imu_frame"  value="IMU_link"/>
+    <param name="baudrate"   value="57600"/>
+    </node>
+</launch>
