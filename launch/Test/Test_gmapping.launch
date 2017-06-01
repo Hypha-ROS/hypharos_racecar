@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+
+<launch>
+    <master auto="start"/>
+
+    <!-- TF setting -->
+    <node pkg="tf" type="static_transform_publisher" name="base_footprint2base_link" args="0 0 0.08 0 0 0 /base_footprint /base_link 10"/>
+    <node pkg="tf" type="static_transform_publisher" name="base_link2laser_link" args="0 0 0.065 0 0 0 /base_link /laser 10"/>
+    <node pkg="tf" type="static_transform_publisher" name="base_link2imu" args="0.1275 0.0 0.0 0 0 0 /base_link /IMU_link 10"/>
+
+    <!-- SENSOR DEVICE -->
+    <!-- RPLidar -->
+    <include file="$(find hypha_racecar)/launch/includes/rplidar.launch.xml" />
+    <!-- IMU -->
+    <include file="$(find hypha_racecar)/launch/includes/gy85.launch.xml" />
+    <!-- Arduino -->
+    <node pkg="rosserial_python" type="serial_node.py" name="serial_node">
+        <param name="port" value="/dev/uno"/>
+        <param name="baud" value="57600"/>
+    </node>
+
+</launch>
