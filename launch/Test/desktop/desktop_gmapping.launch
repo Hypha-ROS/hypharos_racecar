@@ -4,9 +4,15 @@
     <master auto="start"/>
 
     <!--PLAY BAG FILE-->
-    <param name="/use_sim_time" value="true" />
-    <node pkg="rosbag" type="play" name="player" output="screen" args="/home/river85511/rf2o_TEST/rf2o_IMU/Base.bag --clock"/>
+    <param name="use_sim_time" value="true" />
+    <node pkg="rosbag" type="play" name="player" output="screen" args="$(find hypha_racecar)/bags/hypha_basement.bag --clock"/>
 
+    <!-- Robot_Localization -->
+    <node pkg="robot_localization" type="ekf_localization_node" name="ekf_se" clear_params="true">
+        <rosparam command="load" file="$(find hypha_racecar)/param/hypha_ekf_params_bag.yaml" />
+    </node>
+
+    <!-- gmapping -->
     <node pkg="gmapping" type="slam_gmapping" name="slam_gmapping" output="screen">
         <remap from="scan" to="scan"/>
         <param name="map_update_interval" value="2.5"/>
@@ -41,5 +47,6 @@
         <param name="base_frame" value="base_footprint"/>
     </node>
 
-    <node pkg="rviz" type="rviz" name="rviz" args="-d $(find navigation2d_example)/rviz_cfg/rviz_odom_local.rviz"/>
+    <!-- Rviz -->
+    <node pkg="rviz" type="rviz" name="rviz" args="-d $(find hypha_racecar)/rviz_cfg/hypha_gmapping.rviz"/>
 </launch>
