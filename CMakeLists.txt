@@ -10,7 +10,8 @@ project(hypha_racecar)
 find_package(catkin REQUIRED COMPONENTS
   geometry_msgs
   move_base
-  roscp
+  tf
+  roscpp
   rospy
   std_msgs
   visualization_msgs

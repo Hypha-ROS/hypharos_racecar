@@ -25,10 +25,10 @@
 
 	<!-- Odometry -->
     <!--rf2o_Laser_Odometry-->
-    <include file="$(find hypha_racecar)/launch/includes/hypha_rf2o.launch.xml" />
+    <!-- include file="$(find hypha_racecar)/launch/includes/hypha_rf2o.launch.xml" / -->
     <!-- Robot_Localization -->
-    <node pkg="robot_localization" type="ekf_localization_node" name="ekf_se" clear_params="true">
+    <!-- node pkg="robot_localization" type="ekf_localization_node" name="ekf_se" clear_params="true">
         <rosparam command="load" file="$(find hypha_racecar)/param/hypha_ekf_params.yaml" />
-    </node>
+    </node -->
 
 </launch>
