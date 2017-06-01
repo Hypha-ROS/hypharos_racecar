@@ -3,6 +3,8 @@
 <launch>
     <master auto="start"/>
 
+    <arg name="use_rviz" default="false" />
+
     <!-- Map server -->
     <node name="map_server" pkg="map_server" type="map_server" args="$(find hypha_racecar)/map/base_map_0503.yaml"/>
 
@@ -63,5 +65,5 @@
     </node>
 
     <!-- Rviz -->
-    <!--node pkg="rviz" type="rviz" name="rviz" args="-d $(find hypha_racecar)/rviz_cfg/hypha_amcl.rviz"/-->
+    <node pkg="rviz" type="rviz" name="rviz" args="-d $(find hypha_racecar)/rviz_cfg/hypha_amcl.rviz" if="$(arg use_rviz)" />
 </launch>

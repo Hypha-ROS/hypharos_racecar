@@ -2,6 +2,9 @@
 
 <launch>
     <master auto="start"/>
+    <arg name="use_rf2o" default="true" />
+    <arg name="use_ekf" default="false" />
+
     <node pkg="rosbag" type="record" name="recordIMUandLaserScan" output="screen" args="record -O /home/odroid/imu_laser_tf_odom_001.bag -a"/>
 
     <!-- JOYSTICK -->
@@ -23,12 +26,14 @@
         <param name="baud" value="57600"/>
     </node>
 
-	<!-- Odometry -->
+    <!-- Odometry -->
     <!--rf2o_Laser_Odometry-->
-    <include file="$(find hypha_racecar)/launch/includes/hypha_rf2o.launch.xml" />
+    <include file="$(find hypha_racecar)/launch/includes/hypha_rf2o.launch.xml" if="$(arg use_rf2o)" />
     <!-- Robot_Localization -->
-    <!-- node pkg="robot_localization" type="ekf_localization_node" name="ekf_se" clear_params="true">
-        <rosparam command="load" file="$(find hypha_racecar)/param/hypha_ekf_params.yaml" />
-    </node -->
+    <group if="$(arg use_ekf)">
+        <node pkg="robot_localization" type="ekf_localization_node" name="ekf_se" clear_params="true">
+            <rosparam command="load" file="$(find hypha_racecar)/param/hypha_ekf_params.yaml" />
+        </node>
+    </group>
 
 </launch>

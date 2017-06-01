@@ -3,30 +3,33 @@
 <launch>
     <master auto="start"/>
 
-    <!-- TF setting -->
-    <node pkg="tf" type="static_transform_publisher" name="base_footprint2base_link" args="0 0 0.08 0 0 0 /base_footprint /base_link 10"/>
-    <node pkg="tf" type="static_transform_publisher" name="base_link2laser_link" args="0 0 0.065 0 0 0 /base_link /laser 10"/>
-    <node pkg="tf" type="static_transform_publisher" name="base_link2imu" args="0.1275 0.0 0.0 0 0 0 /base_link /IMU_link 10"/>
+    <arg name="use_odom" default="false" />
+    <arg name="use_rviz" default="true" />
 
-    <!-- SENSOR DEVICE -->
-    <!-- RPLidar -->
-    <include file="$(find hypha_racecar)/launch/includes/rplidar.launch.xml" />
-    <!-- Arduino -->
-    <node pkg="rosserial_python" type="serial_node.py" name="serial_node">
-        <param name="port" value="/dev/uno"/>
-        <param name="baud" value="57600"/>
-    </node>
+    <!--PLAY BAG FILE-->
+    <param name="use_sim_time" value="true" />
+    <node pkg="rosbag" type="play" name="player" output="screen" args="$(find hypha_racecar)/bags/hypha_basement.bag --clock"/>
+
+    <group if="$(arg use_odom)">
+        <!-- Robot_Localization -->
+        <node pkg="robot_localization" type="ekf_localization_node" name="ekf_se" clear_params="true">
+            <rosparam command="load" file="$(find hypha_racecar)/param/hypha_ekf_params_bag.yaml" />
+        </node>
+    </group>
 
     <!-- MRPT ICP -->
     <!--PARAMETERS-->
     <param name="ini_filename" value="$(find mrpt_icp_slam_2d)/tutorial/icp_slam_demo.ini"/>
-    <param name="odom_frame_id" value="/odom"/>
+    <param name="odom_frame_id" value="/odom_null" unless="$(arg use_odom)"/>
+    <param name="odom_frame_id" value="/odom" if="$(arg use_odom)"/>
+    <param name="base_frame_id" value="/laser" unless="$(arg use_odom)"/>
+    <param name="base_frame_id" value="/base_footprint" if="$(arg use_odom)"/>
     <param name="global_frame_id" value="/map"/>
-    <param name="base_frame_id" value="/laser"/>
-    <!--for multiple sensors, place comma eg "r1/front_laser/scan,/beacon" -->
     <param name="sensor_source" value="/scan"/>
     <env name="ROSCONSOLE_CONFIG_FILE" value="$(find mrpt_icp_slam_2d)/config/rosconsole.config"/>
     <!--SLAM RUN-->
     <node pkg="mrpt_icp_slam_2d" type="mrpt_icp_slam_2d" name="mrpt_icp_slam_2d" output="screen"></node>
 
+    <!-- Rviz -->
+    <node pkg="rviz" type="rviz" name="rviz" args="-d $(find hypha_racecar)/rviz_cfg/hypha_gmapping.rviz" if="$(arg use_rviz)"/>
 </launch>

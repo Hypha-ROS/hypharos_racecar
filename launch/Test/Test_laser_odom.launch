@@ -1,6 +1,8 @@
 <?xml version="1.0"?>
 
 <launch>
+    <arg name="use_rviz" default="false" />
+
     <node pkg="tf" type="static_transform_publisher" name="base_footprint2base_link" args="0 0 0.08 0 0 0 /base_footprint /base_link 10"/>
     <node pkg="tf" type="static_transform_publisher" name="base_link2laser_link" args="0 0 0.065 0 0 0 /base_link /laser 10"/>
     <node pkg="tf" type="static_transform_publisher" name="base_link2imu" args="0.1275 0.0 0.0 0 0 0 /base_link /IMU_link 10"/>
@@ -16,6 +18,9 @@
     <node pkg="robot_localization" type="ekf_localization_node" name="ekf_se" clear_params="true">
         <rosparam command="load" file="$(find hypha_racecar)/param/hypha_ekf_params.yaml" />
     </node>
+    
+    <!-- Rviz -->
+    <node pkg="rviz" type="rviz" name="rviz" args="-d $(find hypha_racecar)/rviz_cfg/hypha_laser_odom.rviz" if="$(arg use_rviz)"/>
 
 </launch>
 
