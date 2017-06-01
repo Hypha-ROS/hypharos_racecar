@@ -3,12 +3,6 @@
 <launch>
     <master auto="start"/>
 
-    <!-- Map server -->
-    <node name="map_server" pkg="map_server" type="map_server" args="$(find hypha_racecar)/map/base_map_0503.yaml"/>
-
-    <!-- Ros Bag -->
-    <!--node pkg="rosbag" type="record" name="recordIMUandLaserScan" output="screen" args="record -O /home/odroid/Desktop/base_map_new_1420.bag -a"/-->
-
     <!-- TF setting -->
     <node pkg="tf" type="static_transform_publisher" name="base_footprint2base_link" args="0 0 0.08 0 0 0 /base_footprint /base_link 10"/>
     <node pkg="tf" type="static_transform_publisher" name="base_link2laser_link" args="0 0 0.065 0 0 0 /base_link /laser 10"/>
@@ -25,43 +19,4 @@
         <param name="baud" value="57600"/>
     </node>
 
-	<!-- ODOMETRY -->
-    <!--rf2o_Laser_Odometry-->
-    <include file="$(find hypha_racecar)/launch/includes/hypha_rf2o.launch.xml" />
-    <!-- Robot_Localization -->
-    <node pkg="robot_localization" type="ekf_localization_node" name="ekf_se" clear_params="true">
-        <rosparam command="load" file="$(find hypha_racecar)/param/hypha_ekf_params.yaml" />
-    </node>
-
-    <!-- Localization -->
-    <!-- AMCL -->
-    <include file="$(find hypha_racecar)/launch/includes/hypha_amcl.launch.xml"/>
-
-	<!-- Navstack -->
-    <param name="base_local_planner" value="dwa_local_planner/DWAPlannerROS"/>
-    <node pkg="move_base" type="move_base" respawn="false" name="move_base" output="screen">
-        <rosparam file="$(find hypha_racecar)/param/costmap_common_params.yaml" command="load" ns="global_costmap"/>
-        <rosparam file="$(find hypha_racecar)/param/costmap_common_params.yaml" command="load" ns="local_costmap"/>
-        <rosparam file="$(find hypha_racecar)/param/local_costmap_params.yaml" command="load"/>
-        <rosparam file="$(find hypha_racecar)/param/global_costmap_params.yaml" command="load"/> 
-        <rosparam file="$(find hypha_racecar)/param/dwa_local_planner_params.yaml" command="load"/>
-        <rosparam file="$(find hypha_racecar)/param/move_base_params.yaml" command="load"/>
-        <remap from="/odom" to="/odometry/filtered"/>
-    </node>
-
-	<!-- L1 controller -->  
-    <node pkg="hypha_racecar" type="L1_controller" respawn="false" name="L1_controller" output="screen">
-        <param name="Vcmd" value="2.0" type="double"/>
-        <param name="Angle_gain" value="1.0" type="double"/>
-        <param name="Gas_gain" value="0.0" type="double"/>
-        <param name="controller_freq" value="10.0" type="double"/>			
-        <param name="baseSpeed" value="1420" type="int"/>
-        <!--For Futaba S9151-->
-	    <!--param name="baseAngle" value="87.0" type="double"/-->
-        <!--For Futaba S3003-->
-	    <param name="baseAngle" value="50.0" type="double"/>
-    </node>
-
-    <!-- Rviz -->
-    <!--node pkg="rviz" type="rviz" name="rviz" args="-d $(find hypha_racecar)/rviz_cfg/rviz_odom_local.rviz"/-->
 </launch>
