@@ -6,7 +6,7 @@
     <arg name="use_rviz" default="false" />
 
     <!-- Map server -->
-    <node name="map_server" pkg="map_server" type="map_server" args="$(find hypha_racecar)/map/base_map_0503.yaml"/>
+    <node name="map_server" pkg="map_server" type="map_server" args="$(find hypha_racecar)/map/test/map.yaml"/>
 
     <!-- Ros Bag -->
     <!--node pkg="rosbag" type="record" name="recordIMUandLaserScan" output="screen" args="record -O /home/odroid/Desktop/base_map_new_1420.bag -a"/-->
@@ -57,11 +57,11 @@
         <param name="Angle_gain" value="1.0" type="double"/>
         <param name="Gas_gain" value="0.0" type="double"/>
         <param name="controller_freq" value="10.0" type="double"/>			
-        <param name="baseSpeed" value="1420" type="int"/>
+        <param name="baseSpeed" value="1455" type="int"/>
         <!--For Futaba S9151-->
-	    <!--param name="baseAngle" value="87.0" type="double"/-->
+	    <param name="baseAngle" value="87.0" type="double"/>
         <!--For Futaba S3003-->
-	    <param name="baseAngle" value="50.0" type="double"/>
+	    <!--param name="baseAngle" value="50.0" type="double"/-->
     </node>
 
     <!-- Rviz -->
