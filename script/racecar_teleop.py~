@@ -89,7 +89,7 @@ if __name__=="__main__":
         while(1):
             key = getKey()
             if key in moveBindings.keys():
-                control_speed = -moveBindings[key][0]*100 + speed_mid
+                control_speed = -moveBindings[key][0]*40 + speed_mid
                 control_turn = -moveBindings[key][1]*30 + turn_mid
                 count = 0
             elif key == ' ' or key == 'k' :
