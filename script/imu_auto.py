@@ -24,26 +24,11 @@ import math
 import sys
 
 from sensor_msgs.msg import Imu
-from std_msgs.msg import Float64
 from tf.transformations import quaternion_from_euler
-from diagnostic_msgs.msg import DiagnosticArray, DiagnosticStatus, KeyValue
 
-### ---------------- ###
-### Global variables ###
-### ---------------- ### 
-degrees2rad = math.pi/180.0
-rad2deg = 180/math.pi#/180.0
-imu_yaw_calibration = 0.0
-yaw_deg = 0.0
-current = 0.0
-last = 0.0
-dt = 0.0
-roll=0
-pitch=0
-yaw=0
-seq=0
-accel_factor = 9.806 / 256.0    # sensor reports accel as 256.0 = 1G (9.8m/s^2). Convert to m/s^2.
-
+### ------------- ###
+### ROS Node Init ###
+### ------------- ### 
 rospy.init_node("imu_auto_cali_node")
 pub = rospy.Publisher('/imu_data', Imu, queue_size=1)
 imuMsg = Imu()
@@ -64,9 +49,9 @@ imuMsg.angular_velocity_covariance = [
 
 # linear acceleration covariance estimation:
 imuMsg.linear_acceleration_covariance = [
--1 , 0 , 0,
-0 , 0, 0,
-0 , 0 , 0
+0.04 , 0 , 0,
+0 , 0.04, 0,
+0 , 0 , 0.04
 ]
 
 ### -------------- ###
@@ -81,8 +66,6 @@ port = rospy.get_param('~port', '/dev/gy85')
 # baudrate
 baudrate = rospy.get_param('~baudrate', 57600)
 
-# yam compensation
-imu_yaw_calibration = rospy.get_param('~imu_yaw_calibration', 0.0)
 
 # Check your COM port and baud rate
 rospy.loginfo("Opening %s...", port)
@@ -125,6 +108,7 @@ for x in range(0, 200):
 rospy.loginfo("Auto yaw calibration...")
 count = 0.0
 vyaw_sum = 0.0
+yaw_rad = 0.0
 for x in range(0, 300):
     try:
         line = ser.readline()
@@ -137,53 +121,31 @@ for x in range(0, 300):
 	    pass
 
 vyaw_bias = float(vyaw_sum/count)
-rospy.loginfo("Bias of Vyaw is: %f", vyaw_bias)
+rospy.loginfo("Bias of Vyaw is(rad): %f", vyaw_bias)
 
 ### --------------- ###
 ### Publishing data ###
 ### --------------- ### 
 rospy.loginfo("Publishing IMU data...")
+current = rospy.get_time()
+last = current
+dt = 0.0
+seq = 0
 while not rospy.is_shutdown():
     try:
         line = ser.readline()
         line = line.replace("#YPRAG=","")   # Delete "#YPRAG="
         words = string.split(line,",")    # Fields split
-        #print(words) # For debug
-        if len(words) > 2:
-            #in AHRS firmware z axis points down, in ROS z axis points up (see REP 103)
-            yaw_deg = -float(words[0])
-            yaw_deg = yaw_deg + imu_yaw_calibration
-            if yaw_deg > 180.0:
-                yaw_deg = yaw_deg - 360.0
-            if yaw_deg < -180.0:
-                yaw_deg = yaw_deg + 360.0
-            yaw = yaw_deg*degrees2rad
-            #in AHRS firmware y axis points right, in ROS y axis points left (see REP 103)
-            pitch = -float(words[1])*degrees2rad
-            roll = float(words[2])*degrees2rad
 
-            # Publish message
-            # AHRS firmware accelerations are negated
-            # This means y and z are correct for ROS, but x needs reversing
-            imuMsg.linear_acceleration.x = -float(words[3]) * accel_factor
-            imuMsg.linear_acceleration.y = float(words[4]) * accel_factor
-            imuMsg.linear_acceleration.z = float(words[5]) * accel_factor
-
-            imuMsg.angular_velocity.x = float(words[6])
-            #in AHRS firmware y axis points right, in ROS y axis points left (see REP 103)
-            imuMsg.angular_velocity.y = -float(words[7])
-            #in AHRS firmware z axis points down, in ROS z axis points up (see REP 103) 
-            imuMsg.angular_velocity.z = -( float(words[8]) - vyaw_bias )
-        yaw_deg = -( float(words[8]) - vyaw_bias )*rad2deg*dt + yaw_deg
-        if (yaw_deg <= -180):
-	    yaw_deg += 360
-        if (yaw_deg > 180):
-	    yaw_deg -=360
-        yaw_rad = yaw_deg * degrees2rad
+        yaw_rad = -( float(words[8]) - vyaw_bias )*dt + yaw_rad
+        if (yaw_rad < -math.pi):
+	        yaw_rad += 2*math.pi
+        if (yaw_rad > math.pi):
+	        yaw_rad -= 2*math.pi
         current = rospy.get_time()
         dt = current - last;
         last = current
-        #q = quaternion_from_euler(roll,pitch,yaw)
+        #rospy.loginfo("[debug] yaw(rad): %f", yaw_rad)
         q = quaternion_from_euler(0,0,yaw_rad)
         imuMsg.orientation.x = q[0]
         imuMsg.orientation.y = q[1]

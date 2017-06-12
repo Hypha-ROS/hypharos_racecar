@@ -25,7 +25,7 @@
         <param name="baud" value="57600"/>
     </node>
 
-	<!-- ODOMETRY -->
+    <!-- ODOMETRY -->
     <!--rf2o_Laser_Odometry-->
     <include file="$(find hypha_racecar)/launch/includes/hypha_rf2o.launch.xml" />
     <!-- Robot_Localization -->
@@ -37,7 +37,7 @@
     <!-- AMCL -->
     <include file="$(find hypha_racecar)/launch/includes/hypha_amcl.launch.xml"/>
 
-	<!-- Navstack -->
+    <!-- Navstack -->
     <param name="base_local_planner" value="dwa_local_planner/DWAPlannerROS"/>
     <node pkg="move_base" type="move_base" respawn="false" name="move_base" output="screen">
         <rosparam file="$(find hypha_racecar)/param/costmap_common_params.yaml" command="load" ns="global_costmap"/>
@@ -49,17 +49,13 @@
         <remap from="/odom" to="/odometry/filtered"/>
     </node>
 
-	<!-- L1 controller -->  
+    <!-- L1 controller -->  
     <node pkg="hypha_racecar" type="L1_controller" respawn="false" name="L1_controller" output="screen">
-        <param name="Vcmd" value="2.0" type="double"/>
-        <param name="Angle_gain" value="1.0" type="double"/>
-        <param name="Gas_gain" value="0.0" type="double"/>
-        <param name="controller_freq" value="10.0" type="double"/>			
-        <param name="baseSpeed" value="1455" type="int"/>
-        <!--For Futaba S9151-->
-	    <param name="baseAngle" value="87.0" type="double"/>
-        <!--For Futaba S3003-->
-	    <!--param name="baseAngle" value="50.0" type="double"/-->
+        <!-- ESC -->
+        <param name="baseSpeed" value="1455" type="int"/> <!-- pwm for motor constant speed, 1480: stop, 1455: ~0.5m/s, 1445: ~1.5m/s --> 
+        <!-- Servo -->
+        <param name="baseAngle" value="87.0" type="double"/> <!-- the middle pos of servo, for tt02: 87, for hsp: ? -->
+        <param name="Kp"        value="1.0"  type="double"/> <!-- for hsp car, set: -5 ~ -10 -->		
     </node>
 
     <!-- Rviz -->
