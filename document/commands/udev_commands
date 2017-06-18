@@ -11,7 +11,7 @@ $ sudo gedit /etc/udev/rules.d/99-rugby.rules
 past following context into file and save it: 
 
 #[Method-1: recognize through idP & idV]
-KERNEL=="ttyUSB*", ATTRS{idProduct}=="ea60", ATTRS{idVendor}=="10c4", MODE="666", ATTRS{devpath}=="1.2.1.2", SYMLINK+="rplidar"
+KERNEL=="ttyUSB*", ATTRS{idProduct}=="ea60", ATTRS{idVendor}=="10c4", MODE="666", SYMLINK+="rplidar"
 
 #[Method-2: recognize through usb devpath]
 KERNEL=="ttyUSB*", ATTRS{idProduct}=="ea60", ATTRS{idVendor}=="10c4", MODE="666", ATTRS{devpath}=="1.2.1.2", SYMLINK+="rplidar"
