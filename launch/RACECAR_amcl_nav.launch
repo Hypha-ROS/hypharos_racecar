@@ -38,8 +38,8 @@
     <include file="$(find hypha_racecar)/launch/includes/hypha_amcl.launch.xml"/>
 
     <!-- Navstack -->
-    <param name="base_local_planner" value="dwa_local_planner/DWAPlannerROS"/>
     <node pkg="move_base" type="move_base" respawn="false" name="move_base" output="screen">
+        <param name="base_local_planner" value="dwa_local_planner/DWAPlannerROS"/>        
         <rosparam file="$(find hypha_racecar)/param/costmap_common_params.yaml" command="load" ns="global_costmap"/>
         <rosparam file="$(find hypha_racecar)/param/costmap_common_params.yaml" command="load" ns="local_costmap"/>
         <rosparam file="$(find hypha_racecar)/param/local_costmap_params.yaml" command="load"/>

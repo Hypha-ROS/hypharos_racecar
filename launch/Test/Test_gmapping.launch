@@ -44,11 +44,11 @@
         <param name="srt" value="0.2"/>
         <param name="str" value="0.1"/>
         <param name="stt" value="0.2"/>
-        <param name="linearUpdate" value="0.50"/>
+        <param name="linearUpdate" value="0.10"/>
         <param name="angularUpdate" value="0.25"/>
-        <param name="temporalUpdate" value="3.0"/>
+        <param name="temporalUpdate" value="1.0"/>
         <param name="resampleThreshold" value="0.25"/>
-        <param name="particles" value="10"/>
+        <param name="particles" value="30"/>
         <param name="xmin" value="-50.0"/>
         <param name="ymin" value="-50.0"/>
         <param name="xmax" value="50.0"/>
