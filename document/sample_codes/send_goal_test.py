@@ -7,13 +7,11 @@
 # Email: hypha.ros@gmil.com
 # Date: 2017/06/18
 
-
 ## Import libraries
 import string
 import rospy
 import sys
 from geometry_msgs.msg import PoseStamped
-
 
 ## ROS Python Init
 rospy.init_node("send_goal")
@@ -30,9 +28,9 @@ rospy.loginfo("===== send_goal pyhton node =====")
 rospy.loginfo("----- Param Info -----")
 rospy.loginfo("frame_id: %s", frame_id)
 
-
 ## Start pub goal data to move_base
-while not rospy.is_shutdown():
+rospy.sleep(1.0)
+if rospy.is_shutdown() == False:
     rospy.loginfo("Sending goal ...")
     goalMsg.header.stamp = rospy.Time.now()
     goalMsg.header.frame_id = frame_id
