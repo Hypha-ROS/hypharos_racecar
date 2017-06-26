@@ -2,15 +2,22 @@
 
 <launch>
     <arg name="use_rviz" default="true" />
+    <arg name="use_rf2o" default="true" />
+    <arg name="use_ekf"  default="true" />
 
     <!--PLAY BAG FILE-->
     <param name="use_sim_time" value="true" />
-    <node pkg="rosbag" type="play" name="player" output="screen" args="$(find hypha_racecar)/bags/hypha_basement.bag --clock"/>
+    <node pkg="rosbag" type="play" name="player" output="screen" args="$(find hypha_racecar)/bags/imu_laser_tf_001.bag --clock"/>
 
+    <!-- Odometry -->
+    <!--rf2o_Laser_Odometry-->
+    <include file="$(find hypha_racecar)/launch/includes/hypha_rf2o.launch.xml" if="$(arg use_rf2o)" />
     <!-- Robot_Localization -->
-    <node pkg="robot_localization" type="ekf_localization_node" name="ekf_se" clear_params="true">
-        <rosparam command="load" file="$(find hypha_racecar)/param/hypha_ekf_params_bag.yaml" />
-    </node>
+    <group if="$(arg use_ekf)">
+        <node pkg="robot_localization" type="ekf_localization_node" name="ekf_se" clear_params="true">
+            <rosparam command="load" file="$(find hypha_racecar)/param/hypha_ekf_params.yaml" />
+        </node>
+    </group>
 
     <!-- gmapping -->
     <node pkg="gmapping" type="slam_gmapping" name="slam_gmapping" output="screen">

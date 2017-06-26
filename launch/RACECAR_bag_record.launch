@@ -1,11 +1,11 @@
 <?xml version="1.0"?>
 
 <launch>
-    <master auto="start"/>
-    <arg name="use_rf2o" default="true" />
-    <arg name="use_ekf" default="false" />
+    <arg name="use_rf2o"   default="false" />
+    <arg name="use_ekf"    default="false" />
+    <arg name="bag_record" default="true" />
 
-    <node pkg="rosbag" type="record" name="recordIMUandLaserScan" output="screen" args="record -O /home/odroid/imu_laser_tf_odom_001.bag -a"/>
+    <node pkg="rosbag" type="record" name="recordIMUandLaserScan" output="screen" args="record -O $(find hypha_racecar)/bags/imu_laser_tf_001.bag -a" if="$(arg bag_record)"/>
 
     <!-- JOYSTICK -->
     <!-- include file="$(find car_joy)/launch/car_joy.launch" / -->
