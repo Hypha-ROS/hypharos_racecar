@@ -51,11 +51,13 @@
 
     <!-- L1 controller -->  
     <node pkg="hypha_racecar" type="L1_controller" respawn="false" name="L1_controller" output="screen">
+        <!-- L1 -->
+        <param name="Vcmd" value="1.0" /> <!-- speed of car m/s -->        
         <!-- ESC -->
         <param name="baseSpeed" value="1470"/> <!-- pwm for motor constant speed, 1480: stop, 1455: ~0.5m/s, 1445: ~1.5m/s --> 
         <!-- Servo -->
         <param name="baseAngle" value="90.0"/> <!-- the middle pos of servo, for tt02: 87, for hsp: ? -->
-        <param name="AngleGain" value="-8"/> <!-- for hsp car, set: -5 ~ -10 -->		
+        <param name="AngleGain" value="-4"/> <!-- for hsp car, set: <0 -->		
     </node>
 
     <!-- Rviz -->

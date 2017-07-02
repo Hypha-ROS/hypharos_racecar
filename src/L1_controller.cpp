@@ -46,13 +46,13 @@ public:
         pn.param("L", L, 0.26);
         pn.param("Lfw", Lfw, 0.15);
         pn.param("Lrv", Lrv, 10.0);
-        pn.param("Vcmd", Vcmd, 3.0);
+        pn.param("Vcmd", Vcmd, 1.0);
         pn.param("lfw", lfw, 0.13);
         pn.param("lrv", lrv, 10.0);
 
         /*Controller's parameter*/
-        pn.param("controller_freq", controller_freq, 10);
-        pn.param("AngleGain", Kp, -5.0);
+        pn.param("controller_freq", controller_freq, 20);
+        pn.param("AngleGain", Kp, -1.0);
         pn.param("GasGain", Gas_gain, 1.0);
         pn.param("baseSpeed", baseSpeed, 1470);
         pn.param("baseAngle", baseAngle, 90.0);
@@ -372,8 +372,9 @@ public:
                     /*Estimate Gas Input*/
                     if(Vcmd >=0)
                     {
-                            double u = getGasInput(car_vel.linear.x);
-                            cmd_vel.linear.x = baseSpeed - u;
+                            //double u = getGasInput(car_vel.linear.x);
+                            //cmd_vel.linear.x = baseSpeed - u;
+                            cmd_vel.linear.x = baseSpeed;
                     }
                     else	/*The car is closed enough to the goal, therefore STOP!*/
                             cmd_vel.linear.x = 1500;
