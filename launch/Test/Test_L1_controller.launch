@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+
+<launch>
+    <!-- L1 controller -->  
+    <node pkg="hypha_racecar" type="L1_controller_v2" respawn="false" name="L1_controller_v2" output="screen">       
+        <!-- L1 -->
+        <param name="Vcmd" value="1.0" /> <!-- speed of car m/s -->        
+        <!-- ESC -->
+        <param name="baseSpeed" value="1470"/> <!-- pwm for motor constant speed, 1480: stop, 1455: ~0.5m/s, 1445: ~1.5m/s --> 
+        <!-- Servo -->
+        <param name="baseAngle" value="90.0"/> <!-- the middle pos of servo, for tt02: 87, for hsp: ? -->
+        <param name="AngleGain" value="-4"/> <!-- for tt02: >0, for hsp: <0 -->		
+
+        <remap from="/odometry/filtered" to="odom" /> 
+        <remap from="/move_base_node/NavfnROS/plan" to="/move_base_node/NavfnROS/plan" /> 
+    </node>
+</launch>
