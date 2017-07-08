@@ -184,7 +184,7 @@ void L1Controller::goalCB(const geometry_msgs::PoseStamped::ConstPtr& goalMsg)
     try
     {
         geometry_msgs::PoseStamped odom_goal;
-        tf_listener.transformPose("odom", ros::Time::now() , *goalMsg, "map" ,odom_goal);
+        tf_listener.transformPose("odom", ros::Time(0) , *goalMsg, "map" ,odom_goal);
         odom_goal_pos = odom_goal.pose.position;
         goal_received = true;
         goal_reached = false;
@@ -259,7 +259,7 @@ geometry_msgs::Point L1Controller::get_odom_car2WayPtVec(const geometry_msgs::Po
 
             try
             {
-                tf_listener.transformPose("odom", ros::Time::now() , map_path_pose, "map" ,odom_path_pose);
+                tf_listener.transformPose("odom", ros::Time(0) , map_path_pose, "map" ,odom_path_pose);
                 geometry_msgs::Point odom_path_wayPt = odom_path_pose.pose.position;
                 bool _isForwardWayPt = isForwardWayPt(odom_path_wayPt,carPose);
 
