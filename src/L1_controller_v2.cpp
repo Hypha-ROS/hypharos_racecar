@@ -315,7 +315,7 @@ double L1Controller::getEta(const geometry_msgs::Pose& carPose)
 {
     geometry_msgs::Point odom_car2WayPtVec = get_odom_car2WayPtVec(carPose);
 
-    double eta = atan(odom_car2WayPtVec.y/odom_car2WayPtVec.x);
+    double eta = atan2(odom_car2WayPtVec.y,odom_car2WayPtVec.x);
     return eta;
 }
 
@@ -345,7 +345,7 @@ double L1Controller::getL1Distance(const double& _Vcmd)
 
 double L1Controller::getSteeringAngle(double eta)
 {
-    double steeringAnge = -atan((L*sin(eta))/(Lfw/2+lfw*cos(eta)))*(180.0/PI);
+    double steeringAnge = -atan2((L*sin(eta)),(Lfw/2+lfw*cos(eta)))*(180.0/PI);
     //ROS_INFO("Steering Angle = %.2f", steeringAnge);
     return steeringAnge;
 }

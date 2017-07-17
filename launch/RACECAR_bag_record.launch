@@ -3,7 +3,7 @@
 <launch>
     <arg name="use_rf2o"   default="false" />
     <arg name="use_ekf"    default="false" />
-    <arg name="bag_record" default="true" />
+    <arg name="bag_record" default="false" />
 
     <node pkg="rosbag" type="record" name="recordIMUandLaserScan" output="screen" args="record -O $(find hypha_racecar)/bags/imu_laser_tf_001.bag -a" if="$(arg bag_record)"/>
 
