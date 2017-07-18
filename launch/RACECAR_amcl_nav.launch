@@ -37,7 +37,7 @@
     <!-- Navstack -->
     <node pkg="move_base" type="move_base" respawn="false" name="move_base" output="screen">
         <param name="base_local_planner" value="dwa_local_planner/DWAPlannerROS"/> 
-        <paran name="planner_frequency"  value="10" />       
+        <param name="planner_frequency"  value="10" />       
         <rosparam file="$(find hypha_racecar)/param/costmap_common_params.yaml" command="load" ns="global_costmap"/>
         <rosparam file="$(find hypha_racecar)/param/costmap_common_params.yaml" command="load" ns="local_costmap"/>
         <rosparam file="$(find hypha_racecar)/param/local_costmap_params.yaml" command="load"/>
@@ -52,7 +52,7 @@
         <!-- L1 -->
         <param name="Vcmd" value="1.0" /> <!-- speed of car m/s -->        
         <!-- ESC -->
-        <param name="baseSpeed" value="1430"/> <!-- pwm for motor constant speed, 1480: stop, 1440: ~0.5m/s, 1430: ~1.5m/s --> 
+        <param name="baseSpeed" value="1425"/> <!-- pwm for motor constant speed, 1480: stop, 1440: ~0.5m/s, 1430: ~1.5m/s --> 
         <!-- Servo -->
         <param name="baseAngle" value="90.0"/> <!-- the middle pos of servo, for tt02: 87, for hsp: ? -->
         <param name="AngleGain" value="-3.5"/> <!-- for tt02: >0, for hsp: <0 -->		
