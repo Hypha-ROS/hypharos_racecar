@@ -1,16 +1,28 @@
 # Hypha ROS RaceCar pkg
-  
-## About
+
+## Abstract
+The MIT RACECAR project provides a fast (~4 m/s) and fully 
+autonomous platform for engineering students to easily implement 
+control and autonomy related algorithms, however , the total cost of the 
+car is around 3,600 USD which is not affordable for general students. 
+Hence, we demonstrate a low-cost version that is capable of reaching 
+3 m/s but only costs about 600 USD (still onboard, fully autonomous).
+
+
+## About us
 FB Page: https://www.facebook.com/HyphaROS/  
 Website: https://hypharosworkshop.wordpress.com/  
 Youtube: https://www.youtube.com/watch?v=jgS6gpmWPoY (3 m/s)  
+Youku: http://i.youku.com/hypharos  
 Contact: hypha.ros@gmail.com  
 Author: HaoChih, LIN  
 Date: 2017/08/04  
-LICENSE: BSD  
+License: LGPL  
   
 ## Hardware 
-https://goo.gl/9bx72b  
+[google doc] https://goo.gl/9bx72b  
+[baidu doc] http://pan.baidu.com/s/1c2ImUrQ  
+Total Cost: < 600 USD  
 
 ## Software
 ### Windows 
