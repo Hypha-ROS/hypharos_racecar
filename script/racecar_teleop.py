@@ -42,6 +42,8 @@ Moving around:
    m    ,    .
 
 space key, k : force stop
+w/x: shift the middle pos of throttle by +/- 5 pwm
+a/d: shift the middle pos of steering by +/- 2 pwm
 CTRL-C to quit
 """
 
@@ -79,8 +81,10 @@ if __name__=="__main__":
 
     status = 0
     count = 0
-    speed_mid = 1470 #(1500:stop, 1480:0.5m/s, 1450:2.5m/s)
+    speed_mid = 1500 #(1500:stop, 1480:0.5m/s, 1450:2.5m/s)
+    speed_bias = 0
     turn_mid = 90    #(0~180)
+    turn_bias = 0
     control_speed = speed_mid
     control_turn = turn_mid
     try:
@@ -89,17 +93,33 @@ if __name__=="__main__":
         while(1):
             key = getKey()
             if key in moveBindings.keys():
-                control_speed = -moveBindings[key][0]*45 + speed_mid
-                control_turn = moveBindings[key][1]*30 + turn_mid
+                control_speed = -moveBindings[key][0]*40 + speed_mid + speed_bias
+                control_turn = moveBindings[key][1]*30 + turn_mid + turn_bias
                 count = 0
             elif key == ' ' or key == 'k' :
-                control_speed = speed_mid
-                control_turn = turn_mid
+                control_speed = speed_mid + speed_bias
+                control_turn = turn_mid + turn_bias
+            elif key == 'w' :
+                speed_bias = speed_bias - 5
+                control_speed = control_speed - 5
+                print vels(control_speed,control_turn)
+            elif key == 'x' :
+                speed_bias = speed_bias + 5
+                control_speed = control_speed + 5
+                print vels(control_speed,control_turn)
+            elif key == 'a' :
+                turn_bias = turn_bias + 2
+                control_turn = control_turn + 2
+                print vels(control_speed,control_turn)
+            elif key == 'd' :
+                turn_bias = turn_bias - 2
+                control_turn = control_turn - 2
+                print vels(control_speed,control_turn)
             else:
                 count = count + 1
                 if count > 4:
-                    control_speed = speed_mid
-                    control_turn = turn_mid
+                    control_speed = speed_mid + speed_bias
+                    control_turn = turn_mid + turn_bias
                 if (key == '\x03'):
                     break
             twist = Twist()
