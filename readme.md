@@ -44,7 +44,7 @@ $ sudo apt-get install ros-kinetic-rosserial -y
 $ sudo apt-get install ros-kinetic-slam-gmapping -y  
 $ sudo apt-get install ros-kinetic-mrpt-slam ros-kinetic-mrpt-icp-slam-2d -y  
 
-OR
+OR  
 $ sudo apt-get install remmina synaptic gimp ros-kinetic-navigation ros-kinetic-hector-slam ros-kinetic-hector-mapping arduino ros-kinetic-geographic-msgs ros-kinetic-rosserial-arduino ros-kinetic-rosserial ros-kinetic-slam-gmapping ros-kinetic-mrpt-slam ros-kinetic-mrpt-icp-slam-2d -y
 
 create your own catkin_ws   
