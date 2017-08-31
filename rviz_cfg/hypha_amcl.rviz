@@ -6,6 +6,7 @@ Panels:
       Expanded:
         - /Global Options1
         - /Status1
+        - /Odometry1/Shape1
       Splitter Ratio: 0.5
     Tree Height: 655
   - Class: rviz/Selection
@@ -56,8 +57,9 @@ Visualization Manager:
       Name: Map
       Topic: /map
       Unreliable: false
+      Use Timestamp: false
       Value: true
-    - Alpha: 0.5
+    - Alpha: 0.200000003
       Class: rviz/Map
       Color Scheme: costmap
       Draw Behind: false
@@ -65,6 +67,7 @@ Visualization Manager:
       Name: global_costmap
       Topic: /move_base/global_costmap/costmap
       Unreliable: false
+      Use Timestamp: false
       Value: true
     - Alpha: 1
       Autocompute Intensity Bounds: true
@@ -144,6 +147,7 @@ Visualization Manager:
         X: 0
         Y: 0
         Z: 0
+      Pose Color: 255; 85; 255
       Pose Style: None
       Radius: 0.0299999993
       Shaft Diameter: 0.100000001
@@ -153,13 +157,37 @@ Visualization Manager:
       Value: true
     - Angle Tolerance: 0.100000001
       Class: rviz/Odometry
-      Color: 255; 25; 0
+      Covariance:
+        Orientation:
+          Alpha: 0.5
+          Color: 255; 255; 127
+          Color Style: Unique
+          Frame: Local
+          Offset: 1
+          Scale: 1
+          Value: true
+        Position:
+          Alpha: 0.300000012
+          Color: 204; 51; 204
+          Scale: 1
+          Value: true
+        Value: false
       Enabled: true
       Keep: 100
-      Length: 0.100000001
       Name: Odometry
       Position Tolerance: 0.100000001
+      Shape:
+        Alpha: 1
+        Axes Length: 1
+        Axes Radius: 0.100000001
+        Color: 255; 25; 0
+        Head Length: 0.300000012
+        Head Radius: 0.100000001
+        Shaft Length: 0.100000001
+        Shaft Radius: 0.0199999996
+        Value: Arrow
       Topic: /odometry/filtered
+      Unreliable: false
       Value: true
   Enabled: true
   Global Options:
@@ -185,7 +213,7 @@ Visualization Manager:
   Views:
     Current:
       Class: rviz/Orbit
-      Distance: 12.1852999
+      Distance: 22.3690681
       Enable Stereo Rendering:
         Stereo Eye Separation: 0.0599999987
         Stereo Focal Distance: 1
@@ -197,6 +225,7 @@ Visualization Manager:
         Z: 0.00110054587
       Focal Shape Fixed Size: true
       Focal Shape Size: 0.0500000007
+      Invert Z Axis: false
       Name: Current View
       Near Clip Distance: 0.00999999978
       Pitch: 1.50479639

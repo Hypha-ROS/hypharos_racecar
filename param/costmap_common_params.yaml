@@ -6,11 +6,6 @@ footprint: [[-0.305, -0.18], [-0.305, 0.18], [0.305, 0.18], [0.305, -0.18]]
 inflation_radius: 2.5
 cost_scaling_factor: 6
 
-# voxel map configuration; z-voxels 0 are filled by bumpers and 1 by laser scan (kinect)
-#map_type: voxel
-#origin_z: 0.0
-#z_resolution: 0.2
-#z_voxels: 2
-#publish_voxel_map: false
-
+observation_sources: laser_scan_sensor
+laser_scan_sensor: {sensor_frame: laser, data_type: LaserScan, topic: scan, marking: true, clearing: true}
 
