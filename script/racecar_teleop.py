@@ -53,6 +53,11 @@ moveBindings = {
         'j':(0,1),
         'l':(0,-1),
         'u':(1,1),
+       # ',':(-1,0),
+       # '.':(-1,1),
+       # 'm':(-1,-1),
+           }
+moveBackBindings = {
         ',':(-1,0),
         '.':(-1,1),
         'm':(-1,-1),
@@ -81,6 +86,9 @@ if __name__=="__main__":
 
     status = 0
     count = 0
+    reversing=0
+    step=0
+    wait=3
     speed_mid = 1500 #(1500:stop, 1480:0.5m/s, 1450:2.5m/s)
     speed_bias = 0
     turn_mid = 90    #(0~180)
@@ -93,8 +101,27 @@ if __name__=="__main__":
         while(1):
             key = getKey()
             if key in moveBindings.keys():
-                control_speed = -moveBindings[key][0]*40 + speed_mid + speed_bias
+                control_speed = -moveBindings[key][0]*45 + speed_mid + speed_bias
                 control_turn = moveBindings[key][1]*30 + turn_mid + turn_bias
+                count = 0
+		step=0
+		reversing=0
+	    elif key in moveBackBindings.keys():
+		if reversing == 0 :
+			if step < wait :
+                		control_speed = -moveBackBindings[key][0]*120 + speed_mid + speed_bias
+                		control_turn = moveBackBindings[key][1]*30 + turn_mid + turn_bias
+				step=step + 1 
+			elif step < wait+2 :
+				control_speed = speed_mid + speed_bias
+				control_turn = moveBackBindings[key][1]*30 + turn_mid + turn_bias
+				step=step + 1
+			else:
+				step=0
+				reversing=1
+		else:
+		    	control_speed = -moveBackBindings[key][0]*110 + speed_mid + speed_bias
+                    	control_turn = moveBackBindings[key][1]*30 + turn_mid + turn_bias
                 count = 0
             elif key == ' ' or key == 'k' :
                 control_speed = speed_mid + speed_bias
@@ -117,7 +144,7 @@ if __name__=="__main__":
                 print vels(control_speed,control_turn)
             else:
                 count = count + 1
-                if count > 4:
+                if count > 3:
                     control_speed = speed_mid + speed_bias
                     control_turn = turn_mid + turn_bias
                 if (key == '\x03'):
