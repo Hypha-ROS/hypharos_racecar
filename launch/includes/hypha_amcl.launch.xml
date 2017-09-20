@@ -1,6 +1,10 @@
 <?xml version="1.0"?>
 
 <launch>
+    <arg name="init_x" default="0" />
+    <arg name="init_y" default="0" />
+    <arg name="init_a" default="0" />
+
     <node pkg="amcl" type="amcl" name="amcl" output="screen">
         <!-- Publish scans from best pose at a max of 10 Hz -->
         <param name="transform_tolerance" value="0.2" />
@@ -42,9 +46,9 @@
         <param name="base_frame_id" value="/base_footprint"/>
         <param name="odom_model_type" value="diff"/>
 
-        <param name="initial_pose_x" value="4.377"/>
-        <param name="initial_pose_y" value="0.636"/>
-        <param name="initial_pose_a" value="-0.145"/>
+        <param name="initial_pose_x" value="$(arg init_x)"/>
+        <param name="initial_pose_y" value="$(arg init_y)"/>
+        <param name="initial_pose_a" value="$(arg init_a)"/>
         <param name="initial_cov_xx" value="0.25" />
         <param name="initial_cov_yy" value="0.25" />
         <param name="initial_cov_aa" value="0.2" />

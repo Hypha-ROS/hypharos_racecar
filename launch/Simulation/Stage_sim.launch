@@ -1,0 +1,34 @@
+<launch>
+    <param name="/use_sim_time" value="true"/>
+    
+    <!-- move base -->
+    <node pkg="move_base" type="move_base" respawn="false" name="move_base_node">
+        <!-- params for move_base -->
+        <param name="planner_frequency" value="2" />
+        <param name="controller_frequency" value="10.0" />
+        <param name="controller_patience" value="3.0" />
+        <param name="oscillation_timeout" value="30.0" />
+        <param name="oscillation_distance" value="0.5" />
+        <!-- params for local control (dwa) -->
+        <param name="base_local_planner" value="dwa_local_planner/DWAPlannerROS" />
+        <rosparam file="$(find hypha_racecar)/launch/Simulation/includes/dwa_local_planner_params.yaml" command="load" />
+        <!-- params for costmap layers -->        
+        <rosparam file="$(find hypha_racecar)/launch/Simulation/includes/local_costmap_params.yaml" command="load" />
+        <rosparam file="$(find hypha_racecar)/launch/Simulation/includes/global_costmap_params.yaml" command="load" />
+    </node>
+    
+    <!-- map server -->
+    <node name="map_server" pkg="map_server" type="map_server" args="$(find hypha_racecar)/launch/Simulation/includes/maze.yaml" respawn="false" />
+
+    <!-- stage_ros -->
+    <node pkg="stage_ros" type="stageros" name="stageros" args="$(find hypha_racecar)/launch/Simulation/includes/maze.world" respawn="false" >
+        <param name="base_watchdog_timeout" value="0.2"/>
+    </node>
+
+    <!-- AMCL Config -->
+    <include file="$(find hypha_racecar)/launch/Simulation/includes/amcl_node.xml"/>  
+
+    <!-- RVIZ -->
+    <node name="rviz" pkg="rviz" type="rviz" args="-d $(find hypha_racecar)/rviz_cfg/hypha_stage_sim.rviz" />
+
+</launch>

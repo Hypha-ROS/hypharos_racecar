@@ -59,6 +59,6 @@ $ cd ..
 $ catkin_make  
 
 ### Odroid
-Image file for odroid.(with SD card >16G)
+Image file for odroid.(with SD card >16G)  
 [Google drive] https://drive.google.com/open?id=0B7f-a3PiitSec3RyQWRTQVZ1NzA
 

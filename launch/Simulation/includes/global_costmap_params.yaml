@@ -1,0 +1,34 @@
+global_costmap:
+    footprint: [[-0.12, -0.12], [-0.12, 0.12], [0.12, 0.12], [0.25, 0.0], [0.12, -0.12]]
+    footprint_padding: 0.01         
+    transform_tolerance: 0.5
+    update_frequency: 20.0
+    publish_frequency: 20.0
+
+    global_frame: map
+    robot_base_frame: base_link
+    resolution: 0.05
+
+    rolling_window: false
+    track_unknown_space: true
+
+    plugins: 
+        - {name: static,           type: "costmap_2d::StaticLayer"}            
+        #- {name: sensor,           type: "costmap_2d::ObstacleLayer"}
+        - {name: swarm_layer,      type: "ddsbot_swarm_layer::SwarmLayer"}
+        - {name: inflation,        type: "costmap_2d::InflationLayer"}
+
+    static:        
+        map_topic: /map 
+        subscribe_to_updates: false
+
+    #sensor:
+        #observation_sources: base_scan
+        #base_scan: {data_type: LaserScan, expected_update_rate: 0.4, observation_persistence: 0.0, marking: true, clearing: true, max_obstacle_height: 0.4, min_obstacle_height: 0.08}
+
+    swarm_layer:
+       enabled:               true
+
+    inflation:
+        inflation_radius: 1
+        cost_scaling_factor: 10.0

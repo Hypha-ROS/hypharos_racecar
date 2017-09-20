@@ -3,6 +3,11 @@
 <launch>
     <arg name="use_rviz" default="false" />
 
+    <!-- for amcl -->    
+    <arg name="init_x" default="-0.112" />
+    <arg name="init_y" default="-0.091" />
+    <arg name="init_a" default="-1.563" />
+
     <!-- Map server -->
     <node name="map_server" pkg="map_server" type="map_server" args="$(find hypha_racecar)/map/test/map.yaml"/>
 
@@ -30,7 +35,11 @@
 
     <!-- Localization -->
     <!-- AMCL -->
-    <include file="$(find hypha_racecar)/launch/includes/hypha_amcl.launch.xml"/>
+    <include file="$(find hypha_racecar)/launch/includes/hypha_amcl.launch.xml">
+        <arg name="init_x" value="$(arg init_x)"/>
+        <arg name="init_y" value="$(arg init_y)"/>
+        <arg name="init_a" value="$(arg init_a)"/>
+    </include>
 
     <!-- Navstack -->
     <node pkg="move_base" type="move_base" respawn="false" name="move_base" output="screen">
