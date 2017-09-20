@@ -15,8 +15,8 @@ local_costmap:
     resolution: 0.1
 
     plugins:            
-        - {name: sensor,    type: "costmap_2d::ObstacleLayer"}
-        - {name: inflation, type: "costmap_2d::InflationLayer"}
+        - {name: sensor,           type: "costmap_2d::ObstacleLayer"}
+        - {name: inflation,        type: "costmap_2d::InflationLayer"}
 
     sensor:
         observation_sources: laser_scan_sensor
