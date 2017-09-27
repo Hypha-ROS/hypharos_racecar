@@ -21,14 +21,14 @@ Youtube: https://www.youtube.com/watch?v=jgS6gpmWPoY (3 m/s)
 Youku: http://i.youku.com/hypharos  
 Contact: hypha.ros@gmail.com  
 Developer:   
-  HaoChih, LIN  
-  KaiChun, Wu  
+- HaoChih, LIN  
+- KaiChun, Wu  
 Date: 2017/09/29  
 License: LGPL  
 
 ## Features
 * onboard mapping (ICP, Gmapping)  
-* EKF for odometry (Laser Odom + IMU, robot_localization pkg)
+* EKF for odometry (Laser Odom + IMU, robot_localization pkg)  
 * AMCL localization  
 * L1 base controller  
 * Dynamic obstacle avoidance  
@@ -48,7 +48,7 @@ Total Cost: < 600 USD
 ## Software
 ### Odroid Image
 Image file for odroid.(with SD card >16G)  
-[Google drive] https://drive.google.com/open?id=0B7f-a3PiitSec3RyQWRTQVZ1NzA
+[Google drive] https://drive.google.com/open?id=0B7f-a3PiitSec3RyQWRTQVZ1NzA  
 
 ### Desktop Windows 
 64bit RAM >= 8G  
