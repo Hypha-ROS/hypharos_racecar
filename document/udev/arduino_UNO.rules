@@ -1,4 +1,0 @@
-# set the udev rule , make the device_port be fixed by arduino
-#
-KERNEL=="ttyACM*", ATTRS{idVendor}=="2341", ATTRS{idProduct}=="0043", MODE:="666", SYMLINK+="uno"
-

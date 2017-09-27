@@ -1,4 +1,0 @@
-$ sudo fdisk -l /dev/sdb
-$ sudo dd if=/dev/sdb bs=512 count=29624319 of=~/HyphaROS_xu4_kinetic_20170601-2.img
-$ sudo dd if=/dev/sdb bs=512 count=29624319 | gzip > ~/HyphaROS_xu4_kinetic_20170601-2.img.gz
-
