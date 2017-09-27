@@ -1,10 +1,9 @@
 # HyphaROS RaceCar (ver.2) pkg
-![alt text](https://github.com/Hypha-ROS/hypha-racecar/blob/ver.2-beta/document/logo/HyphaROS_logo_2.png)  
+![alt text](https://github.com/Hypha-ROS/hypha-racecar/blob/ver.2-beta/document/photo/HyphaROS_logo_2.png)  
 
 ## Abstract
-This branch is improved version of HyphaROS RaceCar.
-For the bignner, please change to "ver.1-release" branch.
-We will implement "teb_local_planner" to racecar in this ver.  
+This branch is improved/ongoing version of HyphaROS RaceCar.  
+For the bignner, please change to "ver.1-release" branch.    
 
 ## About us
 FB Page: https://www.facebook.com/HyphaROS/  

@@ -74,7 +74,7 @@ odom0_relative: false
 odom0_pose_rejection_threshold: 5
 odom0_twist_rejection_threshold: 0.75
 
-imu0: /imu
+imu0: /imu_data
 imu0_config: [false, false, false,
               false, false, true,
               false, false, false,
@@ -84,9 +84,9 @@ imu0_nodelay: false
 imu0_differential: false
 imu0_relative: true
 imu0_queue_size: 8
-imu0_pose_rejection_threshold: 0.8                 # Note the difference in parameter names
-imu0_twist_rejection_threshold: 0.8                #
-imu0_linear_acceleration_rejection_threshold: 0.8  #
+imu0_pose_rejection_threshold: 3.0                 # Note the difference in parameter names
+imu0_twist_rejection_threshold: 3.0                #
+imu0_linear_acceleration_rejection_threshold: 3.0  #
 
 # [ADVANCED] Some IMUs automatically remove acceleration due to gravity, and others don't. If yours doesn't, please set
 # this to true, and *make sure* your data conforms to REP-103, specifically, that the data is in ENU frame.
