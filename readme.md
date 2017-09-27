@@ -7,6 +7,7 @@ called Hypha RaceCar. Instead of using high-end sensors/SBC like: hokuyo laser,
 Nvidia TX1, etc., our platform replace all expensive components with low-cost product 
 (Odroid XU4, RPLidar A1, GY85 ...). The performance of high-end racecar, e.g. MIT RaceCar,
  is around 4 m/s (~3600USD), in contrast, Hypha RaceCar is able to achieve 3 m/s !   
+[Official Slides] https://github.com/Hypha-ROS/hypha-racecar/blob/release-1.0/document/HyphaROS_RaceCar_Project_released.pdf  
 [3m/s Video] https://www.youtube.com/watch?v=jgS6gpmWPoY  
 [![alt text](http://img.youtube.com/vi/jgS6gpmWPoY/0.jpg)](https://www.youtube.com/watch?v=jgS6gpmWPoY)  
  
@@ -42,6 +43,7 @@ License: LGPL
 * Video tutorial  
 
 ## Hardware 
+![alt text](https://github.com/Hypha-ROS/hypha-racecar/blob/release-1.0/document/logo/HyphaRaceCar.jpg)  
 [google doc] https://goo.gl/9bx72b  
 [baidu doc] http://pan.baidu.com/s/1c2ImUrQ  
 Total Cost: < 600 USD  
