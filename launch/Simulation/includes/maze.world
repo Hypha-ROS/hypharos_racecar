@@ -1,4 +1,5 @@
-include "turtlebot.inc"
+include "carlike_robot.inc"
+
 
 define floorplan model
 (
@@ -16,29 +17,28 @@ define floorplan model
   laser_return 1
 )
 
-resolution 0.05
+resolution 0.02
 interval_sim 100  # simulation timestep in milliseconds
 
 window
 (
-  size [ 600 700 ]
+  size [ 600.0 700.0 ]
   center [ 0.0 0.0 ]
-  rotate [ 0.000 0.000 ]
-  scale 30.789
+  rotate [ 0.0 0.0 ]
+  scale 60
 )
 
 floorplan
 (
   name "maze"
   bitmap "maze.png"
-  size [ 10.000 10.000 2.000 ]
-  pose [  5.000  5.000 0.000 0.000 ]
+  size [ 10.0 10.0 2.0 ]
+  pose [  5.0  5.0 0.0 0.0 ]
 )
 
 # throw in a robot
-turtlebot
+carlike_robot
 (
-  pose [ 2.000 2.000 0.000 0.000 ]
-  name "turtlebot"
-  color "black"
+  pose [ 2.0 2.0 0.0 0.0 ]
+  name "robot"
 )

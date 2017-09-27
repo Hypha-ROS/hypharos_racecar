@@ -1,5 +1,7 @@
 <launch>
     <param name="/use_sim_time" value="true"/>
+    <arg name="use_dwa" default="false" />
+    <arg name="use_teb" default="true" />
     
     <!-- move base -->
     <node pkg="move_base" type="move_base" respawn="false" name="move_base_node">
@@ -9,12 +11,18 @@
         <param name="controller_patience" value="3.0" />
         <param name="oscillation_timeout" value="30.0" />
         <param name="oscillation_distance" value="0.5" />
-        <!-- params for local control (dwa) -->
-        <param name="base_local_planner" value="dwa_local_planner/DWAPlannerROS" />
-        <rosparam file="$(find hypha_racecar)/launch/Simulation/includes/dwa_local_planner_params.yaml" command="load" />
+
         <!-- params for costmap layers -->        
         <rosparam file="$(find hypha_racecar)/launch/Simulation/includes/local_costmap_params.yaml" command="load" />
         <rosparam file="$(find hypha_racecar)/launch/Simulation/includes/global_costmap_params.yaml" command="load" />
+        
+        <!-- params for local control (dwa) -->
+        <param name="base_local_planner" value="dwa_local_planner/DWAPlannerROS" if="$(arg use_dwa)" />
+        <rosparam file="$(find hypha_racecar)/launch/Simulation/includes/dwa_local_planner_params.yaml" command="load" if="$(arg use_dwa)" />
+
+        <!-- params for local control (teb) -->
+        <param name="base_local_planner" value="teb_local_planner/TebLocalPlannerROS" if="$(arg use_teb)" />
+        <rosparam file="$(find hypha_racecar)/launch/Simulation/includes/teb_local_planner_params.yaml" command="load" if="$(arg use_teb)" />
     </node>
     
     <!-- map server -->
@@ -23,6 +31,7 @@
     <!-- stage_ros -->
     <node pkg="stage_ros" type="stageros" name="stageros" args="$(find hypha_racecar)/launch/Simulation/includes/maze.world" respawn="false" >
         <param name="base_watchdog_timeout" value="0.2"/>
+        <remap from="base_scan" to="scan"/>
     </node>
 
     <!-- AMCL Config -->

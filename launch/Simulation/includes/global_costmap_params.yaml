@@ -1,5 +1,5 @@
 global_costmap:
-    footprint: [[-0.12, -0.12], [-0.12, 0.12], [0.12, 0.12], [0.25, 0.0], [0.12, -0.12]]
+    footprint: [ [-0.1,-0.125], [0.5,-0.125], [0.5,0.125], [-0.1,0.125] ]
     footprint_padding: 0.01         
     transform_tolerance: 0.5
     update_frequency: 20.0
@@ -23,7 +23,7 @@ global_costmap:
 
     sensor:
         observation_sources: base_scan
-        base_scan: {data_type: LaserScan, expected_update_rate: 0.4, observation_persistence: 0.0, marking: true, clearing: true, max_obstacle_height: 0.4, min_obstacle_height: 0.08}
+        base_scan: {data_type: LaserScan, topic: scan, marking: true, clearing: true}
 
     inflation:
         inflation_radius: 1

@@ -3,9 +3,8 @@
   Example amcl configuration. Descriptions of parameters, as well as a full list of all amcl parameters, can be found at http://www.ros.org/wiki/amcl.
 -->
 <node pkg="amcl" type="amcl" name="amcl" respawn="true">
-  <remap from="scan" to="base_scan" />
   <!-- Publish scans from best pose at a max of 10 Hz -->
-  <param name="odom_model_type" value="omni"/>
+  <param name="odom_model_type" value="diff"/>
   <param name="odom_alpha5" value="0.01"/>
   <param name="transform_tolerance" value="0.2" />
   <param name="gui_publish_rate" value="10.0"/>
