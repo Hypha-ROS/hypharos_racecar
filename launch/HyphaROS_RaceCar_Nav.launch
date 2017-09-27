@@ -15,7 +15,7 @@
     <!-- Map server -->
     <node name="map_server" pkg="map_server" type="map_server" args="$(find hypha_racecar)/map/test/map.yaml"/>
     <!-- AMCL -->
-    <include file="$(find hypha_racecar)/launch/includes/hypha_amcl.launch.xml">
+    <include file="$(find hypha_racecar)/launch/includes/amcl.launch.xml">
         <arg name="init_x" value="$(arg init_x)"/>
         <arg name="init_y" value="$(arg init_y)"/>
         <arg name="init_a" value="$(arg init_a)"/>

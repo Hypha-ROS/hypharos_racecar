@@ -7,7 +7,7 @@
     <include file="$(find hypha_racecar)/launch/includes/laser_odom_ekf.launch.xml" />
 
     <!-- gmapping -->
-    <node pkg="gmapping" type="slam_gmapping" name="slam_gmapping" output="screen">
+    <node pkg="gmapping" type="slam_gmapping" name="slam_gmapping">
         <remap from="scan" to="scan"/>
         <param name="map_update_interval" value="2.5"/>
         <param name="maxUrange" value="16.0"/>
