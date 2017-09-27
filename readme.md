@@ -21,8 +21,8 @@ Youtube: https://www.youtube.com/watch?v=jgS6gpmWPoY (3 m/s)
 Youku: http://i.youku.com/hypharos  
 Contact: hypha.ros@gmail.com  
 Developer:   
-- HaoChih, LIN  
-- KaiChun, Wu  
+* HaoChih, LIN  
+* KaiChun, Wu  
 Date: 2017/09/29  
 License: LGPL  
 
