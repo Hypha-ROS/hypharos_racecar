@@ -1,5 +1,5 @@
 # HyphaROS RaceCar pkg
-![alt text](https://github.com/Hypha-ROS/hypha-racecar/blob/release-1.0/document/logo/HyphaROS_logo_2.png)  
+![alt text](https://github.com/Hypha-ROS/hypha-racecar/blob/ver.1-release/document/logo/HyphaROS_logo_2.png)  
 
 ## Abstract
 We present a low-cost (~600USD), high speed, fully autonomous 1/10 rc car platform,
@@ -7,13 +7,13 @@ called Hypha RaceCar. Instead of using high-end sensors/SBC like: hokuyo laser,
 Nvidia TX1, etc., our platform replace all expensive components with low-cost product 
 (Odroid XU4, RPLidar A1, GY85 ...). The performance of high-end racecar, e.g. MIT RaceCar,
  is around 4 m/s (~3600USD), in contrast, Hypha RaceCar is able to achieve 3 m/s !   
-[Official Slides] https://github.com/Hypha-ROS/hypha-racecar/blob/release-1.0/document/HyphaROS_RaceCar_Project_released.pdf  
+[Official Slides] https://github.com/Hypha-ROS/hypha-racecar/blob/ver.1-release/document/HyphaROS_RaceCar_Project_released.pdf  
 [3m/s Video] https://www.youtube.com/watch?v=jgS6gpmWPoY  
 [![alt text](http://img.youtube.com/vi/jgS6gpmWPoY/0.jpg)](https://www.youtube.com/watch?v=jgS6gpmWPoY)  
  
 ## For Beginners
 A step by step tutorial from hardware assembling to software installing and opration now is available:  
-https://github.com/Hypha-ROS/hypha-racecar/blob/release-1.0/document/Hypha-ROS-RaceCar-Tutorial_V1.1.pdf 
+https://github.com/Hypha-ROS/hypha-racecar/blob/ver.1-release/document/Hypha-ROS-RaceCar-Tutorial_V1.1.pdf 
 
 ## About us
 FB Page: https://www.facebook.com/HyphaROS/  
@@ -43,7 +43,7 @@ License: LGPL
 * Video tutorial  
 
 ## Hardware 
-![alt text](https://github.com/Hypha-ROS/hypha-racecar/blob/release-1.0/document/logo/HyphaRaceCar.jpg)  
+![alt text](https://github.com/Hypha-ROS/hypha-racecar/blob/ver.1-release/document/logo/HyphaRaceCar.jpg)  
 [google doc] https://goo.gl/9bx72b  
 [baidu doc] http://pan.baidu.com/s/1c2ImUrQ  
 Total Cost: < 600 USD  
