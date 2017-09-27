@@ -82,11 +82,10 @@ if __name__=="__main__":
     settings = termios.tcgetattr(sys.stdin)
     
     rospy.init_node('racecar_teleop')
-    pub = rospy.Publisher('~/car/cmd_vel', Twist, queue_size=5)
+    pub = rospy.Publisher('~/cmd_vel', Twist, queue_size=5)
 
     status = 0
     count = 0
-    reversing=0
     step=0
     wait=3
     speed_mid = 1500 #(1500:stop, 1480:0.5m/s, 1450:2.5m/s)
@@ -105,23 +104,9 @@ if __name__=="__main__":
                 control_turn = moveBindings[key][1]*30 + turn_mid + turn_bias
                 count = 0
 		step=0
-		reversing=0
 	    elif key in moveBackBindings.keys():
-		if reversing == 0 :
-			if step < wait :
-                		control_speed = -moveBackBindings[key][0]*120 + speed_mid + speed_bias
-                		control_turn = moveBackBindings[key][1]*30 + turn_mid + turn_bias
-				step=step + 1 
-			elif step < wait+2 :
-				control_speed = speed_mid + speed_bias
-				control_turn = moveBackBindings[key][1]*30 + turn_mid + turn_bias
-				step=step + 1
-			else:
-				step=0
-				reversing=1
-		else:
-		    	control_speed = -moveBackBindings[key][0]*110 + speed_mid + speed_bias
-                    	control_turn = moveBackBindings[key][1]*30 + turn_mid + turn_bias
+                control_speed = -moveBackBindings[key][0]*110 + speed_mid + speed_bias
+                control_turn = moveBackBindings[key][1]*30 + turn_mid + turn_bias
                 count = 0
             elif key == ' ' or key == 'k' :
                 control_speed = speed_mid + speed_bias
@@ -144,7 +129,7 @@ if __name__=="__main__":
                 print vels(control_speed,control_turn)
             else:
                 count = count + 1
-                if count > 3:
+                if count > 4:
                     control_speed = speed_mid + speed_bias
                     control_turn = turn_mid + turn_bias
                 if (key == '\x03'):
