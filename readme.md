@@ -1,7 +1,8 @@
 # HyphaROS RaceCar pkg
+![alt text](https://github.com/Hypha-ROS/hypha-racecar/blob/release-1.0/document/logo/HyphaROS_logo_2.png)  
 
 ## Abstract
-We present a low-cost(~600USD), high speed, fully autonomous 1/10 rc car platform,
+We present a low-cost (~600USD), high speed, fully autonomous 1/10 rc car platform,
 called Hypha RaceCar. Instead of using high-end sensors/SBC like: hokuyo laser, 
 Nvidia TX1, etc., our platform replace all expensive components with low-cost product 
 (Odroid XU4, RPLidar A1, GY85 ...). The performance of high-end racecar, e.g. MIT RaceCar,
@@ -11,7 +12,8 @@ Nvidia TX1, etc., our platform replace all expensive components with low-cost pr
  
 ## For Beginners
 A step by step tutorial from hardware assembling to software installing and opration now is available:  
- 
+https://github.com/Hypha-ROS/hypha-racecar/blob/release-1.0/document/Hypha-ROS-RaceCar-Tutorial_V1.1.pdf 
+
 ## About us
 FB Page: https://www.facebook.com/HyphaROS/  
 Website: https://hypharosworkshop.wordpress.com/  
