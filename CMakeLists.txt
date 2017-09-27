@@ -7,15 +7,15 @@ project(hypha_racecar)
 ## Find catkin macros and libraries
 ## if COMPONENTS list like find_package(catkin REQUIRED COMPONENTS xyz)
 ## is used, also find other catkin packages
-find_package(catkin REQUIRED COMPONENTS
-  geometry_msgs
-  move_base
-  tf
-  roscpp
-  rospy
-  std_msgs
-  visualization_msgs
-)
+#find_package(catkin REQUIRED COMPONENTS
+#  geometry_msgs
+#  move_base
+#  tf
+#  roscpp
+#  rospy
+#  std_msgs
+#  visualization_msgs
+#)
 
 ## System dependencies are found with CMake's conventions
 # find_package(Boost REQUIRED COMPONENTS system)
@@ -37,13 +37,13 @@ find_package(catkin REQUIRED COMPONENTS
 ## LIBRARIES: libraries you create in this project that dependent projects also need
 ## CATKIN_DEPENDS: catkin_packages dependent projects also need
 ## DEPENDS: system dependencies of this project that dependent projects also need
-catkin_package(
-  CATKIN_DEPENDS visualization_msgs
+#catkin_package(
+#  CATKIN_DEPENDS visualization_msgs
 #  INCLUDE_DIRS include
 #  LIBRARIES hypha_racecar
 #  CATKIN_DEPENDS geometry_msgs move_base roscp rospy std_msgs visualization_msgs
 #  DEPENDS system_lib
-)
+#)
 
 ###########
 ## Build ##
@@ -52,20 +52,10 @@ catkin_package(
 ## Specify additional locations of header files
 ## Your package locations should be listed before other locations
 # include_directories(include)
-include_directories(
-  include
-  ${catkin_INCLUDE_DIRS}
-)
+
 
 ## Declare a C++ library
 # add_library(${PROJECT_NAME}
 #   src/${PROJECT_NAME}/hypha_racecar.cpp
 # )
 
-add_executable(L1_controller src/L1_controller.cpp)
-target_link_libraries(L1_controller ${catkin_LIBRARIES})
-add_dependencies(L1_controller hypha_racecar_generate_messages_cpp)
-
-add_executable(L1_controller_v2 src/L1_controller_v2.cpp)
-target_link_libraries(L1_controller_v2 ${catkin_LIBRARIES})
-add_dependencies(L1_controller_v2 hypha_racecar_generate_messages_cpp)

@@ -1,7 +1,0 @@
-<launch>
-    <!-- rosparam set use_sim_time true -->
-    <param name="use_sim_time" value="true" />
-    
-    <node pkg="rosbag" type="play" name="player" output="screen" args="$(find hypha_racecar)/bags/hypha_basement.bag --clock"/>
-
-</launch>

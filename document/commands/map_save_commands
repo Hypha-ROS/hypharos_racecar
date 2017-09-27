@@ -1,7 +1,0 @@
-## map_server
-$ rosrun map_server map_saver
-$ rosrun map_server map_saver -f hypha_map01 map:=/map
-
-## octomap_server
-rosrun octomap_server octomap_saver -f hypha_costmap.ot
-octovis hypha_costmap.ot
