@@ -8,6 +8,10 @@
     <arg name="init_y" default="0.0" />
     <arg name="init_a" default="0.0" />
 
+    
+
+
+
     <!-- Odom EKF -->
     <include file="$(find hypha_racecar)/launch/includes/laser_odom_ekf.launch.xml" />
 
@@ -34,21 +38,13 @@
         <!-- move_base params -->
         <rosparam file="$(find hypha_racecar)/launch/param/move_base_params.yaml" command="load"/>
         <remap from="/odom" to="/odometry/filtered"/>
+
+	<rosparam file="$(find hypha_racecar)/launch/param/base_local_planner_params.yaml" command="load" />
+	<param name="base_local_planner" value="teb_local_planner/TebLocalPlannerROS" />
+    	<param name="controller_frequency" value="10.0" />
     </node>
 
-    <!-- L1 controller -->  
-    <node pkg="hypha_racecar" type="L1_controller_v2" respawn="false" name="L1_controller_v2" output="screen">       
-        <!-- L1 -->
-        <param name="Vcmd" value="1.0" /> <!-- speed of car m/s -->        
-        <!-- ESC -->
-        <param name="baseSpeed" value="1425"/> <!-- pwm for motor constant speed, 1480: stop, 1440: ~0.5m/s, 1430: ~1.5m/s --> 
-        <!-- Servo -->
-        <param name="baseAngle" value="90.0"/> <!-- the middle pos of servo, for tt02: 87, for hsp: ? -->
-        <param name="AngleGain" value="-3.5"/> <!-- for tt02: >0, for hsp: <0 -->		
-
-        <!-- remap from="/odometry/filtered" to="odom" / --> 
-        <remap from="/move_base_node/NavfnROS/plan" to="/move_base/NavfnROS/plan" /> 
-    </node>
+   
 
     <!-- Rviz -->
     <node pkg="rviz" type="rviz" name="rviz" args="-d $(find hypha_racecar)/rviz_cfg/hypha_nav.rviz" if="$(arg use_rviz)" />

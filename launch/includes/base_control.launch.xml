@@ -1,0 +1,9 @@
+<launch>
+    <node name="base_control"   pkg="hypha_racecar"  type="base_control.py" output="screen">
+    <param name="port"       value="/dev/uno"/>  
+    <param name="base_id"  value="base_link"/>
+    <param name="baudrate"   value="57600"/>
+    </node>
+    <node name="cmd_vel_to_ackermann_drive"   pkg="hypha_racecar"  type="cmd_vel_to_ackermann_drive.py" output="screen">
+    </node>
+</launch>

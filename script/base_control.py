@@ -35,8 +35,8 @@ class BaseControl:
 	self.rotat_z = data.drive.steering_angle
     def timerCmdCB(self, event):
         # send cmd to motor
-        self.turn = self.rotat_z#*180/3.1415926+90
-        self.throttle = self.trans_x#*(-100)+1530
+        self.turn = self.rotat_z*180/3.1415926+90
+        self.throttle = self.trans_x*(-225)+1530
         values = [str(self.turn), str(self.throttle), '0']
         values[2] = str(len(values[0]) + len(values[1]))
         cmd = ",".join(values).encode()

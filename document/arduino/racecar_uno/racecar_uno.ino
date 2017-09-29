@@ -48,6 +48,11 @@ void loop() {
          servovalue=90;
          motorvalue=1520;
        }
+       else if  (out_2>1650 || out_2<1430)
+       {
+         servovalue=90;
+         motorvalue=1520;
+       }
        else if  (out_2>1550   &&  reversing_flag==0)
        {
          servo.write(out_1);
