@@ -82,60 +82,66 @@ if __name__=="__main__":
     settings = termios.tcgetattr(sys.stdin)
     
     rospy.init_node('racecar_teleop')
-    pub = rospy.Publisher('~/cmd_vel', Twist, queue_size=5)
-
+    pub = rospy.Publisher('~/car/cmd_vel', Twist, queue_size=5)
+    flag=0
     status = 0
     count = 0
     step=0
     wait=3
-    speed_mid = 1500 #(1500:stop, 1480:0.5m/s, 1450:2.5m/s)
+    speed_mid = 0 #(1500:stop, 1480:0.5m/s, 1450:2.5m/s)
     speed_bias = 0
-    turn_mid = 90    #(0~180)
+    turn_mid = 0    #(0~180)
     turn_bias = 0
-    control_speed = speed_mid
-    control_turn = turn_mid
+    control_speed = 0
+    control_turn = 0
     try:
         print msg
         print vels(control_speed,control_turn)
         while(1):
             key = getKey()
             if key in moveBindings.keys():
-                control_speed = -moveBindings[key][0]*45 + speed_mid + speed_bias
-                control_turn = moveBindings[key][1]*30 + turn_mid + turn_bias
+                control_speed = moveBindings[key][0]*0.14 
+                control_turn = moveBindings[key][1]*0.65 + turn_bias*0.017
+		flag=1
                 count = 0
 		step=0
 	    elif key in moveBackBindings.keys():
-                control_speed = -moveBackBindings[key][0]*110 + speed_mid + speed_bias
-                control_turn = moveBackBindings[key][1]*30 + turn_mid + turn_bias
-                count = 0
+                control_speed = moveBackBindings[key][0]*0.14
+                control_turn = moveBackBindings[key][1]*0.65 +turn_bias*0.017
+		flag=1                
+		count = 0
             elif key == ' ' or key == 'k' :
-                control_speed = speed_mid + speed_bias
-                control_turn = turn_mid + turn_bias
+                control_speed = 0
+                control_turn = turn_bias*0.017
+		flag=1
+		
             elif key == 'w' :
                 speed_bias = speed_bias - 5
-                control_speed = control_speed - 5
+                control_speed = 0
                 print vels(control_speed,control_turn)
             elif key == 'x' :
                 speed_bias = speed_bias + 5
-                control_speed = control_speed + 5
+                control_speed = 0
                 print vels(control_speed,control_turn)
             elif key == 'a' :
                 turn_bias = turn_bias + 2
-                control_turn = control_turn + 2
+                control_turn = (control_turn + 2)*0.017
                 print vels(control_speed,control_turn)
             elif key == 'd' :
                 turn_bias = turn_bias - 2
-                control_turn = control_turn - 2
+                control_turn = (control_turn - 2)*0.017
                 print vels(control_speed,control_turn)
             else:
                 count = count + 1
                 if count > 4:
-                    control_speed = speed_mid + speed_bias
-                    control_turn = turn_mid + turn_bias
+                    control_speed = 0
+                    control_turn = turn_bias*0.017
+		if count > 5:
+		    flag=0 
                 if (key == '\x03'):
                     break
             twist = Twist()
-            twist.linear.x = control_speed; twist.linear.y = 0; twist.linear.z = 0
+            twist.linear.x = control_speed; twist.linear.y = 0; twist.linear.z = flag
             twist.angular.x = 0; twist.angular.y = 0; twist.angular.z = control_turn
             pub.publish(twist)
 
@@ -144,8 +150,8 @@ if __name__=="__main__":
 
     finally:
         twist = Twist()
-        twist.linear.x = speed_mid; twist.linear.y = 0; twist.linear.z = 0
-        twist.angular.x = 0; twist.angular.y = 0; twist.angular.z = turn_mid
+        twist.linear.x = 0; twist.linear.y = 0; twist.linear.z = 1
+        twist.angular.x = 0; twist.angular.y = 0; twist.angular.z = 0
         pub.publish(twist)
 
     termios.tcsetattr(sys.stdin, termios.TCSADRAIN, settings)

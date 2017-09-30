@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+
+<launch>
+    <arg name="use_rviz" default="false" />
+
+    <!-- Odom EKF -->
+    <include file="$(find hypha_racecar)/launch/includes/laser_odom_ekf.launch.xml" />
+
+    <!-- Rviz -->
+    <node pkg="rviz" type="rviz" name="rviz" args="-d $(find hypha_racecar)/rviz_cfg/hypha_mapping.rviz" if="$(arg use_rviz)"/>
+
+</launch>
