@@ -28,6 +28,9 @@ class BaseControl:
             self.trans_x1 = 0.0
             self.rotat_z1 = 0.0
             self.flag=0
+	    self.count=0
+	    self.last_throttle=1500
+	    self.last_turn=90
         except serial.serialutil.SerialException:
             rospy.logerr("Can not receive data from the port: "+device_port + 
             ". Did you specify the correct port in the launch file?")
@@ -46,26 +49,49 @@ class BaseControl:
 		self.trans_x=self.trans_x1
 		self.rotat_z=self.rotat_z1
         # send cmd to motor
-        if self.trans_x >0 and self.trans_x <=0.15 :
-		self.throttle = 1455
-	elif self.trans_x >0.15 and self.trans_x <=0.4 :
-		self.throttle = 1450
-	elif self.trans_x <0 and self.trans_x >=-0.15 :
-		self.throttle = 1605
-	elif self.trans_x <-0.15 and self.trans_x >=-0.4 :
-		self.throttle = 1615
-	else:
-		self.throttle = 1500
-
-	self.turn = self.rotat_z*180/3.1415926+90
-        
+        #if self.trans_x >0.05 and self.trans_x <=0.15 :
+	#	self.throttle = 1455
+	#elif self.trans_x >0.15 and self.trans_x <=0.4 :
+	#	self.throttle = 1450
+	#elif self.trans_x <-0.05 and self.trans_x >=-0.15 :
+	#	self.throttle = 1605
+	#elif self.trans_x <-0.15 and self.trans_x >=-0.4 :
+	#	self.throttle = 1615
+	#else:
+	#	self.throttle = 1550
+	if self.trans_x>0 and self.trans_x<1.5:
+		self.throttle = self.trans_x*-14+1459
+		self.turn = self.rotat_z*180/3.1415926*1.3+90
+		self.count=0
+	elif self.trans_x>=1.5 :
+		self.throttle = 1444
+		self.turn = self.rotat_z*180/3.1415926*1.3+90
+		self.count=0
+	elif self.trans_x<0 :
+		self.throttle = 1608
+		self.turn = self.rotat_z*180/3.1415926*1.3+90
+		self.count=0
+	elif self.trans_x==0 and self.rotat_z==0 :
+		if self.count<3 :
+			self.throttle =self.last_throttle
+			self.turn=self.last_turn
+			self.count=self.count+1
+		else:
+			self.throttle =1500
+			self.turn = self.rotat_z*180/3.1415926*1.3+90		
+	else:	
+		self.throttle =1500
+		self.turn = self.rotat_z*180/3.1415926*1.3+90
+	
+        self.last_throttle=self.throttle
+	self.last_turn=self.turn  
         values = [str(self.turn), str(self.throttle), '0']
         values[2] = str(len(values[0]) + len(values[1]))
-	#values1=[str(self.rotat_z1), str(self.trans_x1)]
+	values1=[str(self.rotat_z), str(self.trans_x)]
         cmd = ",".join(values).encode()
-	#cmd1 = ",".join(values1).encode()
-	rospy.logerr(cmd)
-	#rospy.logerr(cmd1)        
+	cmd1 = ",".join(values1).encode()
+	#rospy.logerr(cmd)
+	rospy.logerr(cmd1)        
         self.serial.flushInput()
 	self.serial.write(cmd)
 if __name__ == "__main__":
