@@ -104,21 +104,24 @@ if __name__=="__main__":
                 control_turn = moveBindings[key][1]*0.65 + turn_bias*0.017
 		flag=1
                 count = 0
-		step=0
+
 	    elif key in moveBackBindings.keys():
                 control_speed = moveBackBindings[key][0]*0.6
                 control_turn = moveBackBindings[key][1]*0.65 +turn_bias*0.017
 		flag=1                
 		count = 0
+
             elif  key == 'k' :
                 control_speed = 0
                 control_turn = turn_bias*0.017
 		flag=1
 		count = 0
+
             elif key == ' ' :
                 control_speed = 0
                 control_turn = turn_bias*0.017
 		flag=1
+
             elif key == 'w' :
                 speed_bias = speed_bias - 5
                 control_speed = 0
@@ -142,6 +145,7 @@ if __name__=="__main__":
                     control_turn = turn_bias*0.017
 		    flag=1
 		if count > 5:
+		    control_speed = 0
 		    flag=0 
                 if (key == '\x03'):
                     break

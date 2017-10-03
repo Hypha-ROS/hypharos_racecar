@@ -27,7 +27,7 @@ def cmd_callback(data):
   msg.header.frame_id = frame_id
   msg.drive.steering_angle = steering
   msg.drive.speed = v
-  
+  rospy.logerr(msg)
   pub.publish(msg)
   
 

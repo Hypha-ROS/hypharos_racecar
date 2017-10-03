@@ -43,7 +43,7 @@ class BaseControl:
     def cmdCB1(self, data):
         self.trans_x1 = data.linear.x
 	self.rotat_z1 = data.angular.z
-	self.flag=data.linear.z
+	self.flag = data.linear.z
     def timerCmdCB(self, event):
 	if self.flag==1:
 		self.trans_x=self.trans_x1
@@ -61,28 +61,24 @@ class BaseControl:
 	#	self.throttle = 1550
 	if self.trans_x>0 and self.trans_x<1.5:
 		self.throttle = self.trans_x*-14+1459
-		self.turn = self.rotat_z*180/3.1415926*1.3+90
+		self.turn = self.rotat_z*180/3.1415926*1.2+90
 		self.count=0
 	elif self.trans_x>=1.5 :
 		self.throttle = 1444
-		self.turn = self.rotat_z*180/3.1415926*1.3+90
+		self.turn = self.rotat_z*180/3.1415926*1.2+90
 		self.count=0
 	elif self.trans_x<0 :
-		self.throttle = 1608
-		self.turn = self.rotat_z*180/3.1415926*1.3+90
-		self.count=0
-	elif self.trans_x==0 and self.rotat_z==0 :
-		if self.count<3 :
-			self.throttle =self.last_throttle
-			self.turn=self.last_turn
-			self.count=self.count+1
-		else:
-			self.throttle =1500
-			self.turn = self.rotat_z*180/3.1415926*1.3+90		
+		self.throttle = 1610
+		self.turn = self.rotat_z*-180/3.1415926*1.2+90
+		self.count=0		
 	else:	
 		self.throttle =1500
-		self.turn = self.rotat_z*180/3.1415926*1.3+90
-	
+		self.turn = self.rotat_z*180/3.1415926+90
+	if self.turn>135 :
+		self.turn=135
+	elif self.turn<45 :
+		self.turn=45
+ 
         self.last_throttle=self.throttle
 	self.last_turn=self.turn  
         values = [str(self.turn), str(self.throttle), '0']
@@ -91,7 +87,7 @@ class BaseControl:
         cmd = ",".join(values).encode()
 	cmd1 = ",".join(values1).encode()
 	#rospy.logerr(cmd)
-	rospy.logerr(cmd1)        
+	#rospy.logerr(cmd1)        
         self.serial.flushInput()
 	self.serial.write(cmd)
 if __name__ == "__main__":
