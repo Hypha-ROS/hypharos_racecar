@@ -60,7 +60,7 @@ class BaseControl:
 	#else:
 	#	self.throttle = 1550
 	if self.trans_x>0 and self.trans_x<1.5:
-		self.throttle = self.trans_x*-14+1459
+		self.throttle = self.trans_x*-14+1456
 		self.turn = self.rotat_z*180/3.1415926*1.2+90
 		self.count=0
 	elif self.trans_x>=1.5 :

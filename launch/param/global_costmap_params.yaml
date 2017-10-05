@@ -2,8 +2,8 @@ global_costmap:
     footprint: [[-0.305, -0.18], [-0.305, 0.18], [0.305, 0.18], [0.305, -0.18]]
     footprint_padding: 0.01
     transform_tolerance: 1
-    update_frequency: 5.0 
-    publish_frequency: 5.0
+    update_frequency: 1 #5.0 
+    publish_frequency: 1 #5.0
 
     global_frame: map
     robot_base_frame: base_link #base_footprint

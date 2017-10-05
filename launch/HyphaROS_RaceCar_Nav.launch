@@ -17,7 +17,7 @@
 
     <!-- Localization -->
     <!-- Map server -->
-    <node name="map_server" pkg="map_server" type="map_server" args="$(find hypha_racecar)/map/test/map.yaml"/>
+    <node name="map_server" pkg="map_server" type="map_server" args="$(find hypha_racecar)/map/test2/map.yaml"/>
     <!-- AMCL -->
     <include file="$(find hypha_racecar)/launch/includes/amcl.launch.xml">
         <arg name="init_x" value="$(arg init_x)"/>
@@ -38,12 +38,12 @@
         <!-- move_base params -->
         <rosparam file="$(find hypha_racecar)/launch/param/move_base_params.yaml" command="load"/>
         <remap from="/odom" to="/odometry/filtered"/>
-
 	<rosparam file="$(find hypha_racecar)/launch/param/teb_local_planner_params.yaml" command="load" />
 	<param name="base_local_planner" value="teb_local_planner/TebLocalPlannerROS" />
-    	<param name="controller_frequency" value="20.0" />
+    	<param name="controller_frequency" value="5.0" />
 	<param name="controller_patience" value="15.0" />
     </node>
+    
 
    
 

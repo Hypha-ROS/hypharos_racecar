@@ -2,8 +2,8 @@ local_costmap:
     footprint: [[-0.305, -0.18], [-0.305, 0.18], [0.305, 0.18], [0.305, -0.18]]
     footprint_padding: 0.01
     transform_tolerance: 0.5
-    update_frequency: 5 #10.0
-    publish_frequency: 5 #10.0
+    update_frequency: 10 #10.0
+    publish_frequency: 10 #10.0
 
     global_frame: /odom 
     robot_base_frame:  /base_footprint
