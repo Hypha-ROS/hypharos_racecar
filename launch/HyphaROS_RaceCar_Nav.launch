@@ -8,9 +8,7 @@
     <arg name="init_y" default="0.0" />
     <arg name="init_a" default="0.0" />
 
-    
-
-
+   
 
     <!-- Odom EKF -->
     <include file="$(find hypha_racecar)/launch/includes/laser_odom_ekf.launch.xml" />
@@ -40,7 +38,7 @@
         <remap from="/odom" to="/odometry/filtered"/>
 	<rosparam file="$(find hypha_racecar)/launch/param/teb_local_planner_params.yaml" command="load" />
 	<param name="base_local_planner" value="teb_local_planner/TebLocalPlannerROS" />
-    	<param name="controller_frequency" value="5.0" />
+    	<param name="controller_frequency" value="10.0" />
 	<param name="controller_patience" value="15.0" />
     </node>
     
