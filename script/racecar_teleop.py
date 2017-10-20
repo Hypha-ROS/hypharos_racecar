@@ -144,7 +144,7 @@ if __name__=="__main__":
                 print vels(control_speed,control_turn)
             else:
                 count = count + 1
-                if count > 3:
+                if count > 4:
                     control_speed = speed_mid + speed_bias
                     control_turn = turn_mid + turn_bias
                 if (key == '\x03'):
