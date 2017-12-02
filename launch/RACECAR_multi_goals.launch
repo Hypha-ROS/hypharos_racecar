@@ -4,7 +4,7 @@
     <param name="/use_sim_time" value="$(arg sim_mode)"/>
     
     <!-- move base -->
-    <node pkg="adlink_ddsbot" type="multi_goals.py" respawn="false" name="multi_goals" output="screen">
+    <node pkg="hypha_racecar" type="multi_goals.py" respawn="false" name="multi_goals" output="screen">
         <!-- params for move_base -->
         <param name="goalListX" value="[2.0, 1.0]" />
         <param name="goalListY" value="[2.0, 3.0]" />
