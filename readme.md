@@ -68,7 +68,7 @@ $ sudo apt-get install git ros-kinetic-rplidar-ros remmina synaptic gimp ros-kin
 create your own catkin_ws   
 (http://wiki.ros.org/ROS/Tutorials/InstallingandConfiguringROSEnvironment#Create_a_ROS_Workspace)  
 $ cd catkin_ws/src  
-$ git clone https://github.com/MAPIRlab/mapir-ros-pkgs.git  
+$ git clone https://github.com/MAPIRlab/rf2o_laser_odometry  
 $ git clone https://github.com/Hypha-ROS/hypha-racecar   
 $ cd ..  
 $ catkin_make  
