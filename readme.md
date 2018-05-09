@@ -55,9 +55,8 @@ Image file for odroid.(with SD card >16G)
 
 ### Desktop Windows 
 64bit RAM >= 8G  
-VMware Workstation Playe 12 64bit (http://www.vmware.com/products/player/playerpro-evaluation.html)  
-VMWare Image：  
-https://drive.google.com/drive/folders/0B-yq9HXd5lDkRGNJUm9KR0h0VEU  
+VirtualBox 64bit (https://www.virtualbox.org/wiki/Downloads)  
+VirtualBox OVA file：  Will be released soon!
 
 ### Desktop Ubuntu (16.04) 
 64bit RAM > 4G  
