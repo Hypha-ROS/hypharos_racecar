@@ -18,11 +18,15 @@ Developer:
 Date: 2017/09/29  
 License: LGPL  
 
-## Roadmap
-* Hypha RaceCar ver.2   
+## Features 
 * Teb_local_planner  
-* Autonomous parking  
-* SVO for odometry estimation  
+* Autonomous parking
+
+## Roadmap
+* GPS with rviz_satellite
+* SVO for odometry estimation
+* low-cost encoder integration
+* LQR & MPC controller
 * Video tutorial  
 
 
